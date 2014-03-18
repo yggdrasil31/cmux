@@ -51,6 +51,7 @@
 
 /* serial port of the modem */
 #define SERIAL_PORT	"/dev/ttymxc2"
+//#define SERIAL_PORT	"/dev/ttyS0"
 
 /* line speed */
 #define LINE_SPEED	B115200
@@ -311,7 +312,7 @@ int main(void) {
 	*	Send AT commands to put the modem in CMUX mode.
 	*	This is vendor specific and should be changed 
 	*	to fit your modem needs.
-	*	The following matches Quectel M95.
+	*	The following matches Cinterion AGS2-E.
 	*/
 		
 	if (send_at_command(serial_fd, "AT+GMM\r") == -1)
@@ -323,13 +324,15 @@ int main(void) {
 	if (send_at_command(serial_fd, "AT+IPR=115200\r") == -1)
 		errx(EXIT_FAILURE, "AT+IPR=115200: bad response");
 		
-	
+	/*
 	if (send_at_command(serial_fd, "at^scfg=\"Serial/Ifc\",\"24\"\r") == -1)
 		errx(EXIT_FAILURE, "AT+IFC=2,2: bad response");	
+	*/
 	
 	sprintf(atcommand, "AT+CMUX=0\r");
 	if (send_at_command(serial_fd, atcommand) == -1)
 		errx(EXIT_FAILURE, "Cannot enable modem CMUX");
+	
 
 	/* use n_gsm line discipline */
 	sleep(2);
