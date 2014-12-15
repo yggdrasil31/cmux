@@ -51,7 +51,6 @@
 
 /* serial port of the modem */
 #define SERIAL_PORT	"/dev/ttymxc2"
-//#define SERIAL_PORT	"/dev/ttyS0"
 
 /* line speed */
 #define LINE_SPEED	B115200
@@ -323,6 +322,9 @@ int main(void) {
 	
 	if (send_at_command(serial_fd, "AT+IPR=115200\r") == -1)
 		errx(EXIT_FAILURE, "AT+IPR=115200: bad response");
+		
+	if (send_at_command(serial_fd, "AT\\Q3\r") == -1)
+		errx(EXIT_FAILURE, "AT\\Q3\r");
 		
 	/*
 	if (send_at_command(serial_fd, "at^scfg=\"Serial/Ifc\",\"24\"\r") == -1)
