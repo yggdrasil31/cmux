@@ -164,6 +164,7 @@ int send_at_command(int serial_fd, char *command) {
 *	Function raised by signal catching
 */
 void signal_callback_handler(int signum) {
+	dbg("Cmux has caught signal %d",signum);
 	return;
 }
 
@@ -387,6 +388,7 @@ int main(void) {
 
 	/* close the serial line */
 	close(serial_fd);
-
+	dbg("Cmux closed nicely");
+	
 	return EXIT_SUCCESS;
 }
