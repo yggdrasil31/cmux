@@ -377,8 +377,13 @@ int main(void) {
 	}
 
 	/* wait to keep the line discipline enabled, wake it up with a signal */
-	signal(SIGINT, signal_callback_handler);
-	signal(SIGTERM, signal_callback_handler);
+	signal(SIGINT,	signal_callback_handler);
+	signal(SIGTERM,	signal_callback_handler);
+	signal(SIGHUP,	signal_callback_handler);
+	signal(SIGPIPE,	signal_callback_handler);
+	signal(SIGKILL,	signal_callback_handler);
+	signal(SIGUSR1,	signal_callback_handler);
+	
 	pause();
 	
 	/* remove the created virtual TTYs */
